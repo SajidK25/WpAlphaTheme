@@ -1,18 +1,20 @@
 <?php get_header();?>
 <body <?php body_class();?>>
 <?php get_template_part('hero');?>
-<div class="posts" <?php post_class(); ?>>
+<div class="row">
+    <div class="col-md-8">
+    <div class="posts" <?php post_class(); ?>>
 <?php while(have_posts()){
     the_post();?>
     <div class="post">
 
         <div class="container">
             <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <h2 class="post-title text-center">
+                <div class="col-md-12 offset-md-1">
+                    <h2 class="post-title">
                     <?php the_title();?>
                     </h2>
-                    <p class="text-center">
+                    <p class="">
                         <strong><?php the_author();?></strong><br/>
                         <?php echo get_the_date();?>
                     </p>
@@ -31,6 +33,9 @@
 
                 <?php
                 the_content();
+                next_post_link();
+                echo "<br/>";
+                previous_post_link();
                 ?>
 
                 </p>
@@ -47,4 +52,13 @@
 </div>
 <?php
 }?>
+    </div>
+    <div class="col-md-4">
+    <?php if(is_active_sidebar('sidebar-1')){
+        dynamic_sidebar('sidebar-1');
+    }
+    ?>
+    </div>
+
+</div>
 <?php get_footer();?>
